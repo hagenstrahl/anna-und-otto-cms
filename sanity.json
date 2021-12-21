@@ -16,7 +16,26 @@
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"]
+      "plugins": ["@sanity/vision"],
+      "__experimental_spaces": [
+        {
+          "name": "development",
+          "title": "Development",
+          "default": true,
+          "api": {
+            "projectId": "ksdn393e",
+            "dataset": "development"
+          }
+        },
+        {
+          "name": "production",
+          "title": "Production",
+          "api": {
+            "projectId": "ksdn393e",
+            "dataset": "production"
+          }
+        }
+      ]
     }
   },
   "parts": [
