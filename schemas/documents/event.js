@@ -1,4 +1,5 @@
 import { MdEventAvailable } from "react-icons/md";
+import image from "./fields/image";
 import { slug } from "./fields/slug";
 
 export default {
@@ -32,26 +33,7 @@ export default {
       of: [{ type: "block" }],
       validion: (Rule) => Rule.required(),
     },
-    {
-      type: "image",
-      name: "titleImage",
-      title: "Titelbild",
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          type: "string",
-          name: "alt",
-          title: "Alternativer Text",
-          description:
-            "wird angezeigt, wenn das Bild nicht geladen werden konnte",
-          options: {
-            isHighlighted: true,
-          },
-        },
-      ],
-    },
+    { ...image, name: "titleImage", title: "Titelbild" },
     slug,
     {
       type: "object",
