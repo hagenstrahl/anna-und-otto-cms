@@ -1,61 +1,3 @@
-import sanityClient from "part:@sanity/base/client";
-
-export async function slugify({ title, date, id, type }) {
-  const trimmedTitle =
-    date.split("T")[0] +
-    "-" +
-    title
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/ä/g, "ae")
-      .replace(/á/g, "a")
-      .replace(/à/g, "a")
-      .replace(/â/g, "a")
-      .replace(/é/g, "e")
-      .replace(/è/g, "e")
-      .replace(/ê/g, "e")
-      .replace(/í/g, "i")
-      .replace(/ì/g, "i")
-      .replace(/î/g, "i")
-      .replace(/ö/g, "oe")
-      .replace(/ó/g, "o")
-      .replace(/ò/g, "o")
-      .replace(/ô/g, "o")
-      .replace(/ü/g, "ue")
-      .replace(/ú/g, "u")
-      .replace(/ù/g, "u")
-      .replace(/û/g, "u")
-      .replace(/ß/g, "ss")
-      .replace(/\./g, "")
-      .replace(/,/g, "")
-      .replace(/\(/g, "")
-      .replace(/\)/g, "")
-      .slice(0, 200);
-  let needNextTest = true;
-  let counter = 1;
-
-  const trimmedId = id.replace("drafts.", "");
-
-  // test for already used slug, if so, count up and check again
-  do {
-    const query =
-      "count(*[_type == $type && slug.current == $slug && _id != $id && _id != 'drafts.' + $id ]{_id})";
-    const params = {
-      slug: counter === 1 ? trimmedTitle : trimmedTitle + "-" + counter,
-      id: trimmedId,
-      type: type,
-    };
-    const count = await sanityClient.fetch(query, params);
-    if (count === 0) {
-      needNextTest = false;
-    } else {
-      counter++;
-    }
-  } while (needNextTest);
-  if (counter === 1) return trimmedTitle;
-  else return trimmedTitle + "-" + counter;
-}
-
 export const slug = {
   title: "Slug",
   name: "slug",
@@ -67,7 +9,6 @@ export const slug = {
       id: doc._id,
       type: doc._type,
     }),
-    slugify: slugify,
   },
   validation: (Rule) => Rule.required(),
 };

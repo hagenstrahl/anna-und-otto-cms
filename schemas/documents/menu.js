@@ -1,4 +1,3 @@
-import productList from "../../models/product-list";
 import { GrRestaurant } from "react-icons/gr";
 
 export default {
@@ -7,12 +6,18 @@ export default {
   title: "Speisekarte",
   icon: GrRestaurant,
   fields: [
-    ...productList.fields,
     {
       type: "array",
-      name: "sublists",
-      title: "Unterlisten",
-      of: [{ type: "reference", to: [{ type: "productList" }] }],
+      name: "productCategories",
+      title: "Produktkategorien",
+      of: [{ type: "reference", to: [{ type: "productCategory" }] }],
     },
   ],
+  preview: {
+    prepare() {
+      return {
+        title: "Speisekarte",
+      };
+    },
+  },
 };

@@ -1,14 +1,24 @@
-import S from "@sanity/desk-tool/structure-builder";
 import { GiCakeSlice } from "react-icons/gi";
+import { GrRestaurant } from "react-icons/gr";
 
-export default () =>
+export default (S) =>
   S.list()
     .title("Content")
     .items([
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !["product", "productList", "cakeGallery"].includes(listItem.getId())
+          ![
+            "product",
+            "productCategory",
+            "productList",
+            "menu",
+            "cakeGallery",
+          ].includes(listItem.getId())
       ),
+      S.listItem()
+        .title("Speisekarte")
+        .icon(GrRestaurant)
+        .child(S.editor().schemaType("menu").documentId("menu")),
       S.listItem()
         .title("Torten")
         .icon(GiCakeSlice)
