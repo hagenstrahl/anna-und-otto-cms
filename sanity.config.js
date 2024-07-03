@@ -26,4 +26,23 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+
+  document: {
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === "global") {
+        return prev.filter((templateItem) =>
+          ["event"].includes(templateItem.templateId)
+        );
+      }
+      return prev;
+    },
+    actions: (prev, { schemaType }) => {
+      if (["cakeGallery", "menu"].includes(schemaType)) {
+        return prev.filter(
+          ({ action }) => !["unpublish", "delete", "duplicate"].includes(action)
+        );
+      }
+      return prev;
+    },
+  },
 });

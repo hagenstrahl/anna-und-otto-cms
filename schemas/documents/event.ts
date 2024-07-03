@@ -1,52 +1,53 @@
 import { MdEventAvailable } from "react-icons/md";
 import image from "./fields/image";
 import { slug } from "./fields/slug";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
-export default {
+export default defineType({
   type: "document",
   name: "event",
   title: "Veranstaltungen",
   icon: MdEventAvailable,
   fields: [
-    {
+    defineField({
       type: "string",
       name: "title",
       title: "Titel",
       validation: (Rule) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       type: "text",
       name: "subtitle",
       title: "Untertitel",
       rows: 2,
-    },
-    {
+    }),
+    defineField({
       type: "datetime",
       name: "date",
       title: "Datum",
       validation: (Rule) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       type: "array",
       name: "Beschreibung",
       title: "Beschreibung",
-      of: [{ type: "block" }],
-      validion: (Rule) => Rule.required(),
-    },
+      of: [defineArrayMember({ type: "block" })],
+      validation: (Rule) => Rule.required(),
+    }),
     { ...image, name: "titleImage", title: "Titelbild" },
     slug,
-    {
+    defineField({
       type: "object",
       name: "contact",
       title: "Kontaktdaten für Anmeldung",
       fields: [
-        {
+        defineField({
           type: "string",
           name: "tel",
           title: "Telefonnummer",
           validation: (Rule) => Rule.required(),
-        },
-        {
+        }),
+        defineField({
           type: "string",
           name: "email",
           title: "E-Mail-Adresse",
@@ -58,10 +59,10 @@ export default {
                 invert: false,
               }
             ),
-        },
+        }),
       ],
       validation: (Rule) => Rule.required(),
-    },
+    }),
   ],
   preview: {
     select: { title: "title", date: "date" },
@@ -73,4 +74,4 @@ export default {
       };
     },
   },
-};
+});
