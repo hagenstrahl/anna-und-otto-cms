@@ -1,7 +1,8 @@
 import { GiCakeSlice } from "react-icons/gi";
 import { GrRestaurant } from "react-icons/gr";
+import { StructureBuilder } from "sanity/structure";
 
-export default (S) =>
+export default (S: StructureBuilder) =>
   S.list()
     .title("Content")
     .items([
@@ -13,7 +14,7 @@ export default (S) =>
             "productList",
             "menu",
             "cakeGallery",
-          ].includes(listItem.getId())
+          ].includes(listItem.getId() ?? "")
       ),
       S.listItem()
         .title("Speisekarte")
