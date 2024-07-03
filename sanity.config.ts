@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
@@ -39,7 +41,8 @@ export default defineConfig({
     actions: (prev, { schemaType }) => {
       if (["cakeGallery", "menu"].includes(schemaType)) {
         return prev.filter(
-          ({ action }) => !["unpublish", "delete", "duplicate"].includes(action)
+          ({ action }) =>
+            !["unpublish", "delete", "duplicate"].includes(action ?? "")
         );
       }
       return prev;
