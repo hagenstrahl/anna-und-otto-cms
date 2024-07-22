@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, defineArrayMember } from "sanity";
 import image from "./fields/image";
 
 export default defineType({
@@ -10,7 +10,7 @@ export default defineType({
       type: "array",
       name: "images",
       title: "Galerie",
-      of: [image],
+      of: [defineArrayMember(image)],
     }),
   ],
   preview: {

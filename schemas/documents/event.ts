@@ -1,6 +1,6 @@
 import { MdEventAvailable } from "react-icons/md";
 import image from "./fields/image";
-import { slug } from "./fields/slug";
+import slug from "./fields/slug";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
@@ -34,8 +34,8 @@ export default defineType({
       of: [defineArrayMember({ type: "block" })],
       validation: (Rule) => Rule.required(),
     }),
-    { ...image, name: "titleImage", title: "Titelbild" },
-    slug,
+    defineField({ ...image, name: "titleImage", title: "Titelbild" }),
+    defineField(slug),
     defineField({
       type: "object",
       name: "contact",

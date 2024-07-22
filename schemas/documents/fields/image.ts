@@ -1,4 +1,6 @@
-export default {
+import { defineField, defineType } from "sanity";
+
+export default defineType({
   type: "image",
   name: "image",
   title: "Bild",
@@ -6,12 +8,12 @@ export default {
     hotspot: true,
   },
   fields: [
-    {
+    defineField({
       type: "string",
       name: "alt",
       title: "Alternativer Text",
       description: "wird angezeigt, wenn das Bild nicht geladen werden konnte",
-    },
+    }),
   ],
   preview: {
     select: {
@@ -19,4 +21,4 @@ export default {
       media: "asset",
     },
   },
-};
+});
