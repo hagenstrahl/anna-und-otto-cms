@@ -11,9 +11,6 @@ export default {
       name: "alt",
       title: "Alternativer Text",
       description: "wird angezeigt, wenn das Bild nicht geladen werden konnte",
-      options: {
-        isHighlighted: true,
-      },
     },
   ],
   preview: {
