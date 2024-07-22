@@ -1,17 +1,17 @@
+import { defineField, defineType, defineArrayMember } from "sanity";
 import image from "./fields/image";
 
-export default {
+export default defineType({
   type: "document",
   name: "cakeGallery",
   title: "Torten",
-  __experimental_actions: ["create", "update", /*'delete',*/ "publish"],
   fields: [
-    {
+    defineField({
       type: "array",
       name: "images",
       title: "Galerie",
-      of: [image],
-    },
+      of: [defineArrayMember(image)],
+    }),
   ],
   preview: {
     prepare() {
@@ -20,4 +20,4 @@ export default {
       };
     },
   },
-};
+});
